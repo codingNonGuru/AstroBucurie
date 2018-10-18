@@ -4,7 +4,7 @@ from vector import *
 
 screenSize = Vector(1000, 600)
 
-GRAVITATIONAL_CONSTANT = 20000.0
+GRAVITATIONAL_CONSTANT = 15000.0
 
 pygame.init()
 
@@ -39,7 +39,7 @@ class Body:
 
         
 sattelite = Body(screenSize / 3.5, Vector(5.0, -5.0))
-attractor = Body(screenSize / 2.0, Vector(-5.0, 5.0))
+attractor = Body(screenSize / 1.5, Vector(-5.0, 5.0))
 
 while True:
     screen.fill((0, 0, 0))
