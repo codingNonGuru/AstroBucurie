@@ -10,12 +10,6 @@ pygame.init()
 
 screen = pygame.display.set_mode((screenSize.x, screenSize.y), pygame.DOUBLEBUF)
 
-#sattelitePosition = screenSize / 3.5
-
-#satteliteVelocity = Vector (1.0, 0.0)
-
-#attractorPosition = screenSize / 2.0
-
 class Body:
     def __init__(self, position, impulse, mass):
         self.position = position
@@ -52,18 +46,5 @@ while True:
 
     sattelite.draw()
     attractor.draw()
-    
-
- #   direction = attractorPosition - sattelitePosition
-
- #   distance = direction.getLength()
- 
- #   gravitationalFactor = gravitationalConstant / (distance ** 3)
-    
- #   satteliteVelocity += direction * gravitationalFactor
- #   sattelitePosition += satteliteVelocity
-
- #   pygame.draw.circle(screen, (255, 255, 255), (int(sattelitePosition.x), int(sattelitePosition.y)), 2, 0)
- #   pygame.draw.circle(screen, (255, 255, 255), (int(attractorPosition.x), int(attractorPosition.y)), 5, 0)
     
     pygame.display.flip()
