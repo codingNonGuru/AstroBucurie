@@ -4,7 +4,7 @@ from vector import *
 
 screenSize = Vector(1000, 600)
 
-GRAVITATIONAL_CONSTANT = 2000.0
+GRAVITATIONAL_CONSTANT = 100.0
 
 pygame.init()
 
@@ -15,6 +15,7 @@ class Body:
         self.position = position
         self.velocity = impulse / mass
         self.mass = mass
+        self.size = math.sqrt(mass) * 2.0
 
     def calculateAttraction (self, other):
         direction = other.position - self.position 
@@ -29,22 +30,35 @@ class Body:
         self.position += self.velocity
 
     def draw (self):
-        pygame.draw.circle(screen, (255, 255, 255), (int(self.position.x), int(self.position.y)), 2, 0)
+        pygame.draw.circle(screen, (255, 255, 255), (int(self.position.x), int(self.position.y)), int(self.size), 0)
 
         
-sattelite = Body(screenSize / 3.5, Vector(5.0, -5.0), 1.0)
-attractor = Body(screenSize / 1.5, Vector(-5.0, 5.0), 20.0)
+sattelite = Body(screenSize / 4.0, Vector(4.5, -4.5), 1.0)
+attractor = Body(screenSize / 2.0, Vector(0.0, 0.0), 200.0)
+
+bodies = []
+
+bodies.append(sattelite)
+bodies.append(attractor)
+
+newBody = Body(screenSize / 3.0, Vector(4.0, -4.0), 1.0)
+bodies.append(newBody)
+
+newBody = Body(screenSize / 5.0, Vector(5.0, -5.0), 1.0)
+bodies.append(newBody)
 
 while True:
     screen.fill((0, 0, 0))
 
-    sattelite.calculateAttraction(attractor)
-    attractor.calculateAttraction(sattelite)
+    for body in bodies:
+        for otherBody in bodies:
+            if body is not otherBody:
+                body.calculateAttraction(otherBody)
 
-    sattelite.updatePosition()
-    attractor.updatePosition()
+    for body in bodies:
+        body.updatePosition()
 
-    sattelite.draw()
-    attractor.draw()
+    for body in bodies:
+        body.draw()
     
     pygame.display.flip()
